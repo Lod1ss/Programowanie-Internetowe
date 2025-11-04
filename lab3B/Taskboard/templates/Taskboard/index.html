@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>TaskBoard</title>
+</head>
+<body>
+<h1>📋 TaskBoard</h1>
+
+<form id="task-form">
+    <label for="task-title"></label><input type="text" id="task-title" placeholder="Nowe zadanie..." required>
+    <button type="submit">Dodaj</button>
+</form>
+
+<ul id="task-list"></ul>
+
+<hr>
+
+<h3>Kliknięcia: <span id="clicks">0</span></h3>
+<button id="click-btn">Kliknij mnie!</button>
+<button id="reset-btn">Resetuj licznik</button>
+
+<script src="/static/Taskboard/main.js"></script>
+</body>
+</html>
