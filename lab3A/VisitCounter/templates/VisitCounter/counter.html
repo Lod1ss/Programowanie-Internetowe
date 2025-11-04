@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>VisitCounter</title>
+</head>
+
+<body>
+    <h1>Ta strona została odwiedzona <span id="visit-count">{{ visit_count }}</span> razy.</h1>
+    <button id="click-btn">Kliknij mnie!</button>
+    <p>Kliknięcia: <span id="click-count">0</span></p>
+</body>
+
+<script>
+let count = 0;
+
+document.getElementById("click-btn").addEventListener("click", () => {
+    count++;
+    document.getElementById("click-count").textContent = count;
+
+    // Отправляем запрос на Django для обновления visit_count
+    fetch("/increment/", {
+        method: "POST",
+        headers: {
+            "X-CSRFToken": getCookie("csrftoken"),
+            "Content-Type": "application/json"
+        },
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.count !== undefined) {
+            document.getElementById("visit-count").textContent = data.count;
+        }
+    });
+});
+
+// стандартная функция Django для CSRF токена
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== "") {
+        const cookies = document.cookie.split(";");
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + "=")) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+</script>
+</html>
