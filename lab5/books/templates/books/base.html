@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="pl">
+
+
+<head>
+  <meta charset="utf-8">
+  <title>Library — Zarządzanie książkami</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; max-width: 900px; }
+    header { display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; }
+    table { width:100%; border-collapse: collapse; margin-top:10px; }
+    th, td { border:1px solid #ddd; padding:8px; text-align:left; }
+    th { background:#f4f4f4; }
+    .actions a { margin-right:8px; text-decoration: none; }
+    form.inline { display:flex; gap:8px; align-items:center; }
+    .btn { padding:6px 10px; border:1px solid #ccc; background:#f9f9f9; text-decoration:none; color:#000; border-radius:4px; }
+    .btn-primary { background:#2d6cdf; color:white; border-color:#1d4fb8; }
+  </style>
+</head>
+
+
+<body>
+  <header>
+    <h1><a href="{% url 'books:book-list' %}">Zbiór książek</a></h1>
+    <nav>
+      <a class="btn btn-primary" href="{% url 'books:book-add' %}">Dodaj książkę</a>
+    </nav>
+  </header>
+
+  {% block content %}{% endblock %}
+
+  <footer style="margin-top:30px; color:#666; font-size:0.9em;">
+    &copy; Biblioteka
+  </footer>
+</body>
+
+
+</html>
